@@ -43,14 +43,15 @@ def return_student(myname):
 
 
 def add_student(name, email=None):
-    """Add a new student to the classroom
-    with the following keys:
-    'name': the given name
-    'email': if email is given use it otherwise use <name>@example.com
-             in lowercase, you can use the `s.lower()` method
-    'grade': initialize with empty list
-    """
-    pass
+    if not email:
+        email = f"{name.lower()}@example.com"
+    new_student = {
+        'name': name,
+        'email': email,
+        'grades': []
+    }
+    classroom.append(new_student)
+
 
 
 def delete_student(name):
@@ -102,5 +103,5 @@ def get_professions(name):
         s.add(i[0])
     return s
 
-print(get_professions('Alice'))
+# print(get_professions('Alice'))
     
