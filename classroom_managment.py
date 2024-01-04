@@ -32,6 +32,14 @@ classroom = [
         ],
     },
 ]
+def return_student(myname):
+    for i, student in enumerate(classroom):
+        if student['name']==myname:
+            return i
+    return -1
+
+
+
 
 
 def add_student(name, email=None):
@@ -46,27 +54,53 @@ def add_student(name, email=None):
 
 
 def delete_student(name):
-    """Delete a student from the classroom"""
-    pass
+    index=return_student(name)
+    del classroom[index]
+
+# delete_student('Bob')
+# print(classroom)
+
+    
 
 
 def set_email(name, email):
-    """Sets the email of the student"""
-    pass
+    index=return_student(name)
+    classroom[index]['email']=email
+
+# set_email('Bob', 'le.com')
+# print(classroom)
 
 
 def add_grade(name, profession, grade):
-    """Adds a new grade to the student grades"""
-    pass
+        index=return_student(name)
+        new_grade=classroom[index]['grades'].append((profession, grade))
+        
 
+# add_grade('Alice','mbmbm',90)
+# print(classroom)
 
 def avg_grade(name, profession):
-    """Returns the average of grades of the student
-    in the specified profession
-    """
-    pass
+    count=0
+    sum=0
+    index=return_student(name)
+    for i in classroom[index]['grades']:
+        if i[0]==profession:
+            count+=1
+            sum+=i[1]
+    return sum/count
+            
+            
+
+# print(avg_grade('Alice','math'))
+
 
 
 def get_professions(name):
-    """Returns a list of unique professions that student has grades in"""
-    pass
+    index=return_student(name)
+    s=set()
+    for i in classroom[index]['grades']:
+        s.add(i[0])
+    return s
+
+print(get_professions('Alice'))
+    
